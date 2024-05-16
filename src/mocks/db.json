@@ -1,0 +1,124 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 1",
+      "price": "20"
+    },
+    {
+      "id": 2,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 2",
+      "price": "20"
+    },
+    {
+      "id": 3,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 3",
+      "price": "20"
+    },
+    {
+      "id": 4,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 4",
+      "price": "20"
+    },
+    {
+      "id": 5,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 5",
+      "price": "20"
+    },
+    {
+      "id": 6,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 6",
+      "price": "20"
+    },
+    {
+      "id": 7,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 7",
+      "price": "20"
+    },
+    {
+      "id": 8,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 8",
+      "price": "20"
+    },
+    {
+      "id": 9,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 9",
+      "price": "20"
+    },
+    {
+      "id": 10,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 10",
+      "price": "20"
+    },
+    {
+      "id": 11,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 11",
+      "price": "20"
+    },
+    {
+      "id": 12,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 12",
+      "price": "20"
+    },
+    {
+      "id": 13,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 13",
+      "price": "20"
+    },
+    {
+      "id": 14,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 14",
+      "price": "20"
+    },
+    {
+      "id": 15,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 15",
+      "price": "20"
+    },
+    {
+      "id": 16,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 16",
+      "price": "20"
+    },
+    {
+      "id": 17,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 17",
+      "price": "20"
+    },
+    {
+      "id": 18,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 18",
+      "price": "20"
+    },
+    {
+      "id": 19,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 19",
+      "price": "20"
+    },
+    {
+      "id": 20,
+      "image": "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
+      "title": "product 20",
+      "price": "20"
+    }
+  ]
+}
