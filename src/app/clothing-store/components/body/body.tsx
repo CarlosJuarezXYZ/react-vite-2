@@ -1,5 +1,12 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import CarouselImage from "../carousel/Carousel";
+import CardClothing from "../card/Card";
+import { ClothingActions } from "../../store/action";
+import {
+  useClothingStoreDispatch,
+  useClothingStoreState,
+} from "../../store/context";
+import { BodyStyled } from "./body.styled";
 
 const arrayImages = [
   {
@@ -16,8 +23,36 @@ const arrayImages = [
   },
 ];
 
+const { ContentProducts, FlexBox } = BodyStyled;
+
 const Body: FC = () => {
-  return <CarouselImage arrayImages={arrayImages} />;
+  const dispatchClothing = useClothingStoreDispatch();
+  const { productsClothingStore } = useClothingStoreState();
+
+  useEffect(() => {
+    const productsStore = async (): Promise<void> => {
+      try {
+        await ClothingActions.getProductsClothingStore(dispatchClothing);
+      } catch (error) {
+        throw new Error(error as string);
+      }
+    };
+    productsStore();
+  }, []);
+
+  return (
+    <div>
+      <CarouselImage arrayImages={arrayImages} />
+      <FlexBox>
+        <h1>Products</h1>
+        <ContentProducts>
+          {productsClothingStore.map(({ id, src, title, price }) => (
+            <CardClothing key={id} src={src} title={title} price={price} />
+          ))}
+        </ContentProducts>
+      </FlexBox>
+    </div>
+  );
 };
 
 export default Body;

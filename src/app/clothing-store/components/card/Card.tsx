@@ -13,7 +13,7 @@ const CardClothing: FC<CardsProps> = ({ src, title, price }): ReactElement => {
   return (
     <Card
       hoverable
-      style={{ width: 240 }}
+      style={{ width: 240, border: "1px solid green" }}
       cover={<img alt="example" src={src} />}
     >
       <Meta title={title} description={`S/${price}`} />

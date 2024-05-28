@@ -58,6 +58,7 @@ const useClothingStoreDispatch = (): DispatchClothingStore => {
   ) as DispatchClothingStore;
 
   if (!context) {
+    console.log("hola amigos mios");
     throw new Error(
       "useClothingStoreDispatch must be use with a ClotingStoreDispatchContext"
     );
