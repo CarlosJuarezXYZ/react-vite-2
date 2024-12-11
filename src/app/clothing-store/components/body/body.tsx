@@ -1,57 +1,134 @@
-import { FC, useEffect } from "react";
-import CarouselImage from "../carousel/Carousel";
-import CardClothing from "../card/Card";
-import { ClothingActions } from "../../store/action";
+import { FC, useEffect, useState } from "react";
+import CardProduct from "../CardProduct/CardProduct";
+import CarouselImages from "../CarouselImages/CarouselImages";
+import FilterButtonContainer from "../FilterButtonContainer/FilterButtonContainer";
 import {
-  useClothingStoreDispatch,
-  useClothingStoreState,
-} from "../../store/context";
-import { BodyStyled } from "./body.styled";
+  useClothesStoreDispatch,
+  useClothesStoreState,
+} from "../../store/context"
+import { ClothesActions } from "../../store/action";
+import { BodyStyled } from "./Body.styled";
+import { Categories } from "../../domain/categories";
+import { useNavigate } from "react-router-dom";
+import { clothesRoutes } from "../../clothes-routes";
+import { categories } from "./categories";
 
-const arrayImages = [
-  {
-    src: "https://safestorage.pe/wp-content/uploads/2022/05/ordenado-ropa-closet-safe-storage.jpg",
-    width: 100,
-  },
-  {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKfWytSxTEHK1PJIEVkKr0r9i_CZpdCgDD7ks_PCZWA&s",
-    width: 100,
-  },
-  {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL_OBK9_oeD3-4QGon_Ok8u_e7hMjZs-3cWV2KIVmoxg&s",
-    width: 100,
-  },
-];
+const { BodyProductsContainer, BodyContainer } = BodyStyled;
 
-const { ContentProducts, FlexBox } = BodyStyled;
+const Body:FC = () => {
+  const dispatchClothing = useClothesStoreDispatch();
+  const { productsClothesFakeStore,searchProduct } = useClothesStoreState();
+  const navigate = useNavigate();
+  const [filteredProducts, setFilteredProducts] = useState(
+    productsClothesFakeStore
+  );
 
-const Body: FC = () => {
-  const dispatchClothing = useClothingStoreDispatch();
-  const { productsClothingStore } = useClothingStoreState();
+  const filterBySearchTerm = searchProduct
+    ? filteredProducts.filter((product) =>
+        product.title.toLowerCase().includes(searchProduct.toLowerCase())
+      )
+    : filteredProducts;
+
+  const [visibleItems, setVisibleItems] = useState<any>([]);
 
   useEffect(() => {
-    const productsStore = async (): Promise<void> => {
+    let startIndex = 0;
+    const itemsPerPage = 5;
+
+    const updateVisibleItems = () => {
+      const nextItems = productsClothesFakeStore
+        .slice(startIndex, startIndex + itemsPerPage)
+        .map((product) => ({
+          id: product.id,
+          src: product.image,
+        }));
+
+      setVisibleItems(nextItems);
+
+      startIndex =
+        (startIndex + itemsPerPage) % productsClothesFakeStore.length;
+    };
+
+    updateVisibleItems();
+
+    const intervalId = setInterval(updateVisibleItems, 5000);
+
+    return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productsClothesFakeStore]);
+
+  useEffect(() => {
+    setFilteredProducts(productsClothesFakeStore);
+  }, [productsClothesFakeStore]);
+
+  useEffect(() => {
+    const productsClothe = async (): Promise<void> => {
       try {
-        await ClothingActions.getProductsClothingStore(dispatchClothing);
+        await ClothesActions.getProductsClothesFake(dispatchClothing);
       } catch (error) {
         throw new Error(error as string);
       }
     };
-    productsStore();
+    productsClothe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleButtonClick = (category: string) => {
+    if (category === Categories.All) {
+      setFilteredProducts(productsClothesFakeStore);
+    } else {
+      setFilteredProducts(
+        productsClothesFakeStore.filter(
+          (product) => product.category === category
+        )
+      );
+    }
+  };
+
+  const onContinue = async (id: number) => {
+    try {
+      await ClothesActions.getProductDetailClothesFake(dispatchClothing, id);
+      navigate(clothesRoutes.productDetail);
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  };
+
   return (
-    <div>
-      <CarouselImage arrayImages={arrayImages} />
-      <FlexBox>
-        <h1>Products</h1>
-        <ContentProducts>
-          {productsClothingStore.map(({ id, src, title, price }) => (
-            <CardClothing key={id} src={src} title={title} price={price} />
-          ))}
-        </ContentProducts>
-      </FlexBox>
-    </div>
+    <BodyContainer>
+      <CarouselImages images={visibleItems} />
+      <FilterButtonContainer
+        buttons={categories}
+        onButtonClick={handleButtonClick}
+      />
+      <BodyProductsContainer>
+        {filterBySearchTerm.map(
+          ({
+            id,
+            image,
+            title,
+            description,
+            offerPrice,
+            realPrice,
+            isBetSeller,
+          }) => (
+            <div>
+             <CardProduct
+              key={id}
+              id={id}
+              image={image}
+              title={title}
+              description={description}
+              offerPrice={offerPrice}
+              realPrice={realPrice}
+              isBestSeller={isBetSeller}
+              onClick={() => onContinue(id)}
+            />
+            </div>
+          )
+        )}
+      </BodyProductsContainer>
+    </BodyContainer>
   );
 };
 

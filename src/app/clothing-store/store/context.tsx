@@ -6,68 +6,67 @@ import {
   useReducer,
 } from "react";
 import {
-  ClothingStoreState,
-  DispatchClothingStore,
-} from "../domain/clothing-store";
-import { clothingStoreInitialState, clothingStoreReducer } from "./reducer";
+  ClothesStoreState,
+  DispatchClothesStore,
+} from "../domain/clothes-store";
+import { clothesStoreInitialState, clothesStoreReducer } from "./reducer";
 
-type ClothingStoreProviderType = PropsWithChildren<{
-  extraState?: Partial<ClothingStoreState>;
+type ClothesStoreProviderType = PropsWithChildren<{
+  extraState?: Partial<ClothesStoreState>;
 }>;
 
-const ClothingStoreStateContext = createContext<ClothingStoreState | undefined>(
+const ClothesStoreStateContext = createContext<ClothesStoreState | undefined>(
   undefined
 );
-const ClothingStoreDispatchContext = createContext<
-  DispatchClothingStore | undefined
+const ClothesStoreDispatchContext = createContext<
+  DispatchClothesStore | undefined
 >(undefined);
 
-const ClothingStoreProvider: FC<ClothingStoreProviderType> = ({
+const ClothesStoreProvider: FC<ClothesStoreProviderType> = ({
   children,
   extraState,
 }) => {
-  const [state, dispatch] = useReducer(clothingStoreReducer, {
-    ...clothingStoreInitialState,
+  const [state, dispatch] = useReducer(clothesStoreReducer, {
+    ...clothesStoreInitialState,
     ...extraState,
   });
 
   return (
-    <ClothingStoreStateContext.Provider value={state}>
-      <ClothingStoreDispatchContext.Provider value={dispatch}>
+    <ClothesStoreStateContext.Provider value={state}>
+      <ClothesStoreDispatchContext.Provider value={dispatch}>
         {children}
-      </ClothingStoreDispatchContext.Provider>
-    </ClothingStoreStateContext.Provider>
+      </ClothesStoreDispatchContext.Provider>
+    </ClothesStoreStateContext.Provider>
   );
 };
 
-const useClothingStoreState = (): ClothingStoreState => {
-  const context = useContext(ClothingStoreStateContext) as ClothingStoreState;
+const useClothesStoreState = (): ClothesStoreState => {
+  const context = useContext(ClothesStoreStateContext) as ClothesStoreState;
 
   if (!context) {
     throw new Error(
-      "useClothingStore must be use within a ClothingStoreContext"
+      "useClothesStore must be use within a ClothesStoreContext"
     );
   }
 
   return context;
 };
 
-const useClothingStoreDispatch = (): DispatchClothingStore => {
+const useClothesStoreDispatch = (): DispatchClothesStore => {
   const context = useContext(
-    ClothingStoreDispatchContext
-  ) as DispatchClothingStore;
+    ClothesStoreDispatchContext
+  ) as DispatchClothesStore;
 
   if (!context) {
-    console.log("hola amigos mios");
     throw new Error(
-      "useClothingStoreDispatch must be use with a ClotingStoreDispatchContext"
+      "useClothesStoreDispatch must be use with a ClotingStoreDispatchContext"
     );
   }
   return context;
 };
 
 export {
-  ClothingStoreProvider,
-  useClothingStoreState,
-  useClothingStoreDispatch,
+  ClothesStoreProvider,
+  useClothesStoreState,
+  useClothesStoreDispatch,
 };

@@ -1,3 +1,3 @@
 export enum ModuleRoute {
-  ClothingStore = "clothing-store",
+  Clothes = "clothe",
 }

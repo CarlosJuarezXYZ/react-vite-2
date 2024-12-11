@@ -1,14 +1,8 @@
 import { FC } from "react";
-import Header from "../../components/header/header";
-import Body from "../../components/body/body";
+import Body from "../../components/Body/Body";
 
 const Home: FC = () => {
-  return (
-    <>
-      <Header />
-      <Body />
-    </>
-  );
+  return <Body />;
 };
 
 export default Home;

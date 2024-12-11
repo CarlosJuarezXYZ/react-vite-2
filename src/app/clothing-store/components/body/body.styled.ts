@@ -1,28 +1,27 @@
 import styled from "styled-components";
 
-const ContentProducts = styled.div`
+const BodyContainer = styled.div``;
+
+const BodyProductsContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+  gap: 30px;
+  padding: 50px;
 
-  @media (max-width: 800px) {
-    grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width: 500px) {
-    grid-template-columns: 1fr;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
-
-const FlexBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const BodyStyled = {
-  ContentProducts,
-  FlexBox,
+  BodyProductsContainer,
+  BodyContainer,
 };

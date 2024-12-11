@@ -1,22 +1,26 @@
 import { FC } from "react";
-import styled from "styled-components";
 import Logo from "../logo/Logo";
+import { AiFillHome, AiOutlineShoppingCart } from "react-icons/ai";
+import { HeaderStyled } from "./Header.styled";
+import { DrawerEvidence } from "../Drawer/Drawer";
+import { useNavigate } from "react-router-dom";
+import { clothesRoutes } from "../../clothes-routes";
+import Search from "../Search/Search";
 
-const ContainerHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  padding: 20px 0px;
-  background-color: #154c72;
-`;
+const {ContentHeader,ContainerIcons} = HeaderStyled;
 
 const Header: FC = () => {
+  const navigate = useNavigate();
   return (
-    <ContainerHeader>
-      <Logo children="Fashion Store" />
-    </ContainerHeader>
+    <ContentHeader>
+      <Logo>Charly</Logo>
+      <ContainerIcons>
+          <Search/>
+          <AiFillHome  style={{ cursor: "pointer" }}  onClick={()=>navigate(clothesRoutes.home)} size={30} />
+          <AiOutlineShoppingCart  style={{ cursor: "pointer" }} onClick={()=>navigate(clothesRoutes.cartPage)} size={30} />
+          <DrawerEvidence />
+        </ContainerIcons>
+    </ContentHeader>
   );
 };
 

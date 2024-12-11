@@ -10,10 +10,14 @@ interface LogoProps {
 const ContainerLogo = styled.div`
   display: flex;
   align-items: start;
+  font-style:italic;
   font-size: 50px;
   justify-content: start;
   color: ${ColorsCloting.white};
   font-weight: bold;
+  //width:200px;
+  padding:0;
+  //border:1px solid black;
   &:hover {
     transform: scale(1.1);
   }
@@ -22,7 +26,7 @@ const ContainerLogo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 25px;
   }
 `;
 
