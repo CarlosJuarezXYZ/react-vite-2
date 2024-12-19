@@ -11,7 +11,7 @@ interface CardProps {
   image: string;
   title: string;
   offerPrice: number;
-  realPrice: number;
+  realPrice: string;
   onClick?:()=>void;
   description?: string;
   isBestSeller?: boolean;

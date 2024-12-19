@@ -7,10 +7,10 @@ import {
   useClothesStoreState,
 } from "../../store/context"
 import { ClothesActions } from "../../store/action";
-import { BodyStyled } from "./Body.styled";
 import { Categories } from "../../domain/categories";
 import { useNavigate } from "react-router-dom";
 import { clothesRoutes } from "../../clothes-routes";
+import { BodyStyled } from "./body.styled";
 import { categories } from "./categories";
 
 const { BodyProductsContainer, BodyContainer } = BodyStyled;

@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Logo from "../logo/Logo";
 import { AiFillHome, AiOutlineShoppingCart } from "react-icons/ai";
-import { HeaderStyled } from "./Header.styled";
 import { DrawerEvidence } from "../Drawer/Drawer";
 import { useNavigate } from "react-router-dom";
 import { clothesRoutes } from "../../clothes-routes";
 import Search from "../Search/Search";
+import { HeaderStyled } from "./Header.styled";
 
 const {ContentHeader,ContainerIcons} = HeaderStyled;
 
