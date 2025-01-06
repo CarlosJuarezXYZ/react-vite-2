@@ -13,7 +13,7 @@ const Header: FC = () => {
   const navigate = useNavigate();
   return (
     <ContentHeader>
-      <Logo>Charly</Logo>
+      <Logo onClick={()=>navigate(clothesRoutes.home)}>Charly</Logo>
       <ContainerIcons>
           <Search/>
           <AiFillHome  style={{ cursor: "pointer" }}  onClick={()=>navigate(clothesRoutes.home)} size={30} />

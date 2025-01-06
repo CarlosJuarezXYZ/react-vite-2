@@ -5,6 +5,7 @@ import ColorsCloting from "../../ui/colors";
 
 interface LogoProps {
   children: string | ReactElement;
+  onClick?: ()=>void;
 }
 
 const ContainerLogo = styled.div`
@@ -30,8 +31,8 @@ const ContainerLogo = styled.div`
   }
 `;
 
-const Logo: FC<LogoProps> = ({ children }) => {
-  return <ContainerLogo>{children}</ContainerLogo>;
+const Logo: FC<LogoProps> = ({ children,onClick }) => {
+  return <ContainerLogo onClick={onClick}>{children}</ContainerLogo>;
 };
 
 export default Logo;

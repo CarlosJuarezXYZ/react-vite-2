@@ -5,19 +5,21 @@ import FilterButtonContainer from "../FilterButtonContainer/FilterButtonContaine
 import {
   useClothesStoreDispatch,
   useClothesStoreState,
-} from "../../store/context"
+} from "../../store/context";
 import { ClothesActions } from "../../store/action";
 import { Categories } from "../../domain/categories";
 import { useNavigate } from "react-router-dom";
 import { clothesRoutes } from "../../clothes-routes";
 import { BodyStyled } from "./body.styled";
+import { Modal } from "antd";
 import { categories } from "./categories";
+import { ShoppingCartInterface } from "../../domain/clothes";
 
 const { BodyProductsContainer, BodyContainer } = BodyStyled;
 
-const Body:FC = () => {
+const Body: FC = () => {
   const dispatchClothing = useClothesStoreDispatch();
-  const { productsClothesFakeStore,searchProduct } = useClothesStoreState();
+  const { productsClothesFakeStore, searchProduct } = useClothesStoreState();
   const navigate = useNavigate();
   const [filteredProducts, setFilteredProducts] = useState(
     productsClothesFakeStore
@@ -30,6 +32,7 @@ const Body:FC = () => {
     : filteredProducts;
 
   const [visibleItems, setVisibleItems] = useState<any>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     let startIndex = 0;
@@ -94,6 +97,29 @@ const Body:FC = () => {
     }
   };
 
+  const onSaveProductCart = ({
+    id,
+    title,
+    price,
+    src,
+  }: ShoppingCartInterface): void => {
+    ClothesActions.saveProductClotheFake(dispatchClothing, {
+      id,
+      title,
+      price,
+      src,
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    navigate(clothesRoutes.cartPage);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <BodyContainer>
       <CarouselImages images={visibleItems} />
@@ -113,21 +139,38 @@ const Body:FC = () => {
             isBetSeller,
           }) => (
             <div>
-             <CardProduct
-              key={id}
-              id={id}
-              image={image}
-              title={title}
-              description={description}
-              offerPrice={offerPrice}
-              realPrice={realPrice}
-              isBestSeller={isBetSeller}
-              onClick={() => onContinue(id)}
-            />
+              <CardProduct
+                key={id}
+                image={image}
+                title={title}
+                description={description}
+                offerPrice={offerPrice}
+                realPrice={realPrice}
+                isBestSeller={isBetSeller}
+                onClick={() => onContinue(id)}
+                onSaveProduct={() =>
+                  onSaveProductCart({
+                    id: id,
+                    title: title,
+                    price: offerPrice,
+                    src: image,
+                  })
+                }
+              />
             </div>
           )
         )}
       </BodyProductsContainer>
+      <Modal
+        open={isModalOpen}
+        okText="Ir al carrito"
+        cancelText="Seguir comprando"
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        El producto fue agregado al carrito de compra. Gracias por comprar con
+        nosotros.
+      </Modal>
     </BodyContainer>
   );
 };
