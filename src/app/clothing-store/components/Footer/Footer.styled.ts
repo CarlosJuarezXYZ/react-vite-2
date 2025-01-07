@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import ColorsCloting from "../../ui/colors";
 
-const Content = styled.div``;
+const Content = styled.div`
+`;
 const Content1 = styled.div`
   display: flex;
   width: 100%;
@@ -16,7 +17,7 @@ const Content1 = styled.div`
   }
 `;
 const ContentFooter = styled.div`
-  height: 180px;
+  height: auto;
   display: block;
   align-items: start;
   justify-content: center;

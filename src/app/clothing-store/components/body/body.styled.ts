@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-const BodyContainer = styled.div``;
-
 const BodyProductsContainer = styled.div`
   display: grid;
   gap: 30px;
   padding: 50px;
+  overflow: hidden; 
 
   grid-template-columns: 1fr;
 
@@ -23,5 +22,4 @@ const BodyProductsContainer = styled.div`
 `;
 export const BodyStyled = {
   BodyProductsContainer,
-  BodyContainer,
 };

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CheckoutStyled } from "./Checkout.styled";
 import formValid, { FormFieldName } from "./Form/form.schema";
-import { CreditCard } from "@mui/icons-material";
 import SuccessModal from "../../components/SuccessModal/SuccessModal";
 
 const {
@@ -19,7 +18,7 @@ const {
   Button,
 } = CheckoutStyled;
 
-const { Adress, City, Zip, PaymentMethod, CardNumber,ExpiryDate,CVV } =
+const { Adress, City, Zip, PaymentMethod, CardNumber, ExpiryDate, CVV } =
   FormFieldName;
 
 const CheckoutPage: React.FC = () => {
@@ -27,8 +26,6 @@ const CheckoutPage: React.FC = () => {
     register,
     getValues,
     setValue,
-    handleSubmit,
-    control,
     formState: { errors, isValid, touchedFields },
   } = useForm({
     resolver: yupResolver(formValid),
@@ -44,8 +41,7 @@ const CheckoutPage: React.FC = () => {
     },
   });
 
-  console.log(isValid,'isValid')
-  const [showModal,setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const showCampsCreditCard = getValues(PaymentMethod) === "creditCard";
 
   return (
@@ -117,15 +113,13 @@ const CheckoutPage: React.FC = () => {
               type="radio"
               id="creditCard"
               {...register(PaymentMethod)}
-              
               onChange={(event: any) => {
-                console.log(event,'value')
-               setValue(PaymentMethod, event.target.value, {
+                console.log(event, "value");
+                setValue(PaymentMethod, event.target.value, {
                   shouldValidate: true,
                   shouldDirty: true,
-                })
-              }
-              }
+                });
+              }}
               value={"creditCard"}
             />
             {touchedFields[PaymentMethod] && (
@@ -182,7 +176,12 @@ const CheckoutPage: React.FC = () => {
                 id="expiryDate"
                 {...register(ExpiryDate)}
                 placeholder="MM/AA"
-               onChange={(event)=>setValue(ExpiryDate,event.target.value,{shouldDirty:true,shouldValidate:true})}
+                onChange={(event) =>
+                  setValue(ExpiryDate, event.target.value, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  })
+                }
               />
               {touchedFields[ExpiryDate] && (
                 <ErrorText>{errors?.expiryDate?.message}</ErrorText>
@@ -194,18 +193,25 @@ const CheckoutPage: React.FC = () => {
                 id="cvv"
                 {...register(CVV)}
                 placeholder="Ingrese el CVV"
-                onChange={(event)=>setValue(CVV,event.target.value,{shouldDirty:true,shouldValidate:true})}
+                onChange={(event) =>
+                  setValue(CVV, event.target.value, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  })
+                }
               />
-              {touchedFields[CVV] && <ErrorText>{errors?.cvv?.message}</ErrorText>}
+              {touchedFields[CVV] && (
+                <ErrorText>{errors?.cvv?.message}</ErrorText>
+              )}
             </FormGroup>
           </>
         )}
       </Section>
 
-      <Button onClick={()=>setShowModal(true)} disabled={!isValid}>
+      <Button onClick={() => setShowModal(true)} disabled={!isValid}>
         Confirmar Compra
       </Button>
-      <SuccessModal isVisible={showModal} onClose={()=>setShowModal(false)}/>
+      <SuccessModal isVisible={showModal} onClose={() => setShowModal(false)} />
     </CheckoutContainer>
   );
 };

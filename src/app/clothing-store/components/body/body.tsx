@@ -11,11 +11,11 @@ import { Categories } from "../../domain/categories";
 import { useNavigate } from "react-router-dom";
 import { clothesRoutes } from "../../clothes-routes";
 import { BodyStyled } from "./body.styled";
-import { Modal } from "antd";
+import { Modal, Skeleton } from "antd";
 import { categories } from "./categories";
 import { ShoppingCartInterface } from "../../domain/clothes";
 
-const { BodyProductsContainer, BodyContainer } = BodyStyled;
+const { BodyProductsContainer } = BodyStyled;
 
 const Body: FC = () => {
   const dispatchClothing = useClothesStoreDispatch();
@@ -33,6 +33,7 @@ const Body: FC = () => {
 
   const [visibleItems, setVisibleItems] = useState<any>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoader, setIsloader] = useState(true);
 
   useEffect(() => {
     let startIndex = 0;
@@ -67,12 +68,17 @@ const Body: FC = () => {
   useEffect(() => {
     const productsClothe = async (): Promise<void> => {
       try {
+        setIsloader(true);
         await ClothesActions.getProductsClothesFake(dispatchClothing);
       } catch (error) {
         throw new Error(error as string);
+      } finally {
+        setIsloader(false);
       }
     };
+
     productsClothe();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -121,12 +127,13 @@ const Body: FC = () => {
   };
 
   return (
-    <BodyContainer>
+    <div>
       <CarouselImages images={visibleItems} />
       <FilterButtonContainer
         buttons={categories}
         onButtonClick={handleButtonClick}
       />
+
       <BodyProductsContainer>
         {filterBySearchTerm.map(
           ({
@@ -139,28 +146,39 @@ const Body: FC = () => {
             isBetSeller,
           }) => (
             <div>
-              <CardProduct
-                key={id}
-                image={image}
-                title={title}
-                description={description}
-                offerPrice={offerPrice}
-                realPrice={realPrice}
-                isBestSeller={isBetSeller}
-                onClick={() => onContinue(id)}
-                onSaveProduct={() =>
-                  onSaveProductCart({
-                    id: id,
-                    title: title,
-                    price: offerPrice,
-                    src: image,
-                  })
-                }
-              />
+              {isLoader ? (
+                <Skeleton
+                  active
+                  avatar
+                  paragraph={{ rows: 3 }}
+                  title={{ width: "80%" }}
+                  style={{ marginBottom: "20px", width: "300px" }}
+                />
+              ) : (
+                <CardProduct
+                  key={id}
+                  image={image}
+                  title={title}
+                  description={description}
+                  offerPrice={offerPrice}
+                  realPrice={realPrice}
+                  isBestSeller={isBetSeller}
+                  onClick={() => onContinue(id)}
+                  onSaveProduct={() =>
+                    onSaveProductCart({
+                      id: id,
+                      title: title,
+                      price: offerPrice,
+                      src: image,
+                    })
+                  }
+                />
+              )}
             </div>
           )
         )}
       </BodyProductsContainer>
+
       <Modal
         open={isModalOpen}
         okText="Ir al carrito"
@@ -171,7 +189,7 @@ const Body: FC = () => {
         El producto fue agregado al carrito de compra. Gracias por comprar con
         nosotros.
       </Modal>
-    </BodyContainer>
+    </div>
   );
 };
 
