@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ColorsCloting from "../../ui/colors";
 
 const Content = styled.div`
+
 `;
 const Content1 = styled.div`
   display: flex;

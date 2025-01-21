@@ -4,7 +4,8 @@ const BodyProductsContainer = styled.div`
   display: grid;
   gap: 30px;
   padding: 50px;
-  overflow: hidden; 
+  overflow: hidden;
+  flex: 1;
 
   grid-template-columns: 1fr;
 
