@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const BodyProductsContainer = styled.div`
+const HomeProductsContainer = styled.div`
   display: grid;
   gap: 30px;
   padding: 50px;
@@ -21,6 +21,6 @@ const BodyProductsContainer = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
 `;
-export const BodyStyled = {
-  BodyProductsContainer,
+export const HomeStyled = {
+  HomeProductsContainer,
 };
