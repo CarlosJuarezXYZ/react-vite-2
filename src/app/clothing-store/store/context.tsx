@@ -15,7 +15,7 @@ type ClothesStoreProviderType = PropsWithChildren<{
   extraState?: Partial<ClothesStoreState>;
 }>;
 
-const ClothesStoreStateContext = createContext<ClothesStoreState | undefined>(
+export const ClothesStoreStateContext = createContext<ClothesStoreState | undefined>(
   undefined
 );
 const ClothesStoreDispatchContext = createContext<
