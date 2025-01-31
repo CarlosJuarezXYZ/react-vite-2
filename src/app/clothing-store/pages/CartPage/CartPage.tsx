@@ -1,9 +1,13 @@
 import React from "react";
-import { useClothesStoreDispatch, useClothesStoreState } from "../../store/context";
+import {
+  useClothesStoreDispatch,
+  useClothesStoreState,
+} from "../../store/context";
 import { useNavigate } from "react-router-dom";
 import { clothesRoutes } from "../../clothes-routes";
 import { CartPageStyled } from "./CartPage.styled";
 import { ClothesActionsEnum } from "../../domain/clothes-action.enum";
+import EmptyProducts from "../../components/EmptyProducts/EmptyProducts";
 
 const {
   CartContainer,
@@ -20,7 +24,7 @@ const {
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
-  const disptachClothe = useClothesStoreDispatch(); 
+  const disptachClothe = useClothesStoreDispatch();
   const calculateTotal = () => {
     return shoppingCart
       .reduce((total, item) => total + item.price * item.quantity!, 0)
@@ -34,10 +38,12 @@ const CartPage: React.FC = () => {
   };
 
   const handleRemoveItem = (id: number) => {
-    disptachClothe({type:ClothesActionsEnum.DeleteProduct,payload:id});
+    disptachClothe({ type: ClothesActionsEnum.DeleteProduct, payload: id });
   };
 
-  return (
+  return shoppingCart.length === 0 ? (
+    <EmptyProducts message="No products in the cart" />
+  ) : (
     <CartContainer>
       <CartItemsGrid>
         {shoppingCart.map((item) => (

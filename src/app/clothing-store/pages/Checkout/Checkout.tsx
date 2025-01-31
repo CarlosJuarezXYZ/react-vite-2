@@ -4,6 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { CheckoutStyled } from "./Checkout.styled";
 import formValid, { FormFieldName } from "./Form/form.schema";
 import SuccessModal from "../../components/SuccessModal/SuccessModal";
+import { useNavigate } from "react-router-dom";
+import { clothesRoutes } from "../../clothes-routes";
+import { useClothesStoreDispatch } from "../../store/context";
+import { ClothesActionsEnum } from "../../domain/clothes-action.enum";
 
 const {
   CheckoutContainer,
@@ -41,8 +45,17 @@ const CheckoutPage: React.FC = () => {
     },
   });
 
+  const navigate = useNavigate();
+  const dispatchClothing = useClothesStoreDispatch();
+
   const [showModal, setShowModal] = useState(false);
   const showCampsCreditCard = getValues(PaymentMethod) === "creditCard";
+
+  const onCloseModal = ():void =>{
+    setShowModal(false);
+    dispatchClothing({type:ClothesActionsEnum.ClearProducts});
+    navigate(clothesRoutes.home);
+  }
 
   return (
     <CheckoutContainer>
@@ -211,7 +224,7 @@ const CheckoutPage: React.FC = () => {
       <Button onClick={() => setShowModal(true)} disabled={!isValid}>
         Confirmar Compra
       </Button>
-      <SuccessModal isVisible={showModal} onClose={() => setShowModal(false)} />
+      <SuccessModal isVisible={showModal} onClose={onCloseModal} />
     </CheckoutContainer>
   );
 };

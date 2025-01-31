@@ -14,6 +14,7 @@ import { HomeStyled } from "./Home.styled";
 import CarouselImages from "../../components/CarouselImages/CarouselImages";
 import FilterButtonContainer from "../../components/FilterButtonContainer/FilterButtonContainer";
 import CardProduct from "../../components/CardProduct/CardProduct";
+import EmptyProducts from "../../components/EmptyProducts/EmptyProducts";
 
 const { HomeProductsContainer } = HomeStyled;
 
@@ -135,47 +136,51 @@ const Home: FC = () => {
       />
 
       <HomeProductsContainer>
-        {filterBySearchTerm.map(
-          ({
-            id,
-            image,
-            title,
-            description,
-            offerPrice,
-            realPrice,
-            isBetSeller,
-          }) => (
-            <div  key={id}>
-              {isLoader ? (
-                <Skeleton
-                  key={id}
-                  active
-                  avatar
-                  paragraph={{ rows: 3 }}
-                  title={{ width: "80%" }}
-                  style={{ marginBottom: "20px", width: "300px" }}
-                />
-              ) : (
-                <CardProduct
-                  key={id}
-                  image={image}
-                  title={title}
-                  description={description}
-                  offerPrice={offerPrice}
-                  realPrice={realPrice}
-                  isBestSeller={isBetSeller}
-                  onClick={() => onContinue(id)}
-                  onSaveProduct={() =>
-                    onSaveProductCart({
-                      id: id,
-                      title: title,
-                      price: offerPrice,
-                      src: image,
-                    })
-                  }
-                />
-              )}
-            </div>
+        {filterBySearchTerm.length === 0 ? (
+          <EmptyProducts message="No products found" />
+        ) : (
+          filterBySearchTerm.map(
+            ({
+              id,
+              image,
+              title,
+              description,
+              offerPrice,
+              realPrice,
+              isBetSeller,
+            }) => (
+              <div key={id}>
+                {isLoader ? (
+                  <Skeleton
+                    key={id}
+                    active
+                    avatar
+                    paragraph={{ rows: 3 }}
+                    title={{ width: "80%" }}
+                    style={{ marginBottom: "20px", width: "300px" }}
+                  />
+                ) : (
+                  <CardProduct
+                    key={id}
+                    image={image}
+                    title={title}
+                    description={description}
+                    offerPrice={offerPrice}
+                    realPrice={realPrice}
+                    isBestSeller={isBetSeller}
+                    onClick={() => onContinue(id)}
+                    onSaveProduct={() =>
+                      onSaveProductCart({
+                        id: id,
+                        title: title,
+                        price: offerPrice,
+                        src: image,
+                      })
+                    }
+                  />
+                )}
+              </div>
+            )
           )
         )}
       </HomeProductsContainer>

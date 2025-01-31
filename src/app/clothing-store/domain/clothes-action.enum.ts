@@ -4,4 +4,5 @@ export enum ClothesActionsEnum {
   SaveProductShoppingCart = "SAVE_PRODUCT_SHOPPING_CART",
   SaveSearchProduct = "SAVE_SEARCH_PRODUCT",
   DeleteProduct = "DELETE_PRODUCT",
+  ClearProducts = "CLEAR_PRODUCTS",
 }

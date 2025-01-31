@@ -48,6 +48,8 @@ export const clothesStoreReducer = produce(
           ];
         }
         break;
+      case ClothesActionsEnum.ClearProducts:
+        return clothesStoreInitialState;
       default:
         throw new Error(`Unknow type: ${type}`);
     }
