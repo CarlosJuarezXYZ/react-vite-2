@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ColorsCloting from "../../ui/colors";
 
 const ContentHeader = styled.div`
   width: 100vw;
@@ -7,7 +8,7 @@ const ContentHeader = styled.div`
   border-radius: 0 0 0 20px;
   margin-bottom: 20px;
   color: #fff;
-  background: #007bff;
+  background-color: ${ColorsCloting.black};
 `;
 
 const ContainerIcons = styled.div`
