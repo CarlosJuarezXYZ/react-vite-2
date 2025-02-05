@@ -7,11 +7,13 @@ const { LayoutContainer, MainContent } = LayoutStyled;
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
+    <>
     <LayoutContainer>
       <Header />
       <MainContent>{children}</MainContent>
       <Footer />
     </LayoutContainer>
+    </>
   );
 };
 
