@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../Footer/Footer";
-import { LayoutStyled } from "./Layout.styled";
 import Header from "../Header/Header";
+import { LayoutStyled } from "./Layout.styled";
 
 const { LayoutContainer, MainContent } = LayoutStyled;
 
